@@ -1,18 +1,17 @@
 [package]
-name = "message-io-key-value-server"
+name = "workshop-distributed-systems"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [[bin]]
-name="server"
-path="src/server.rs"
+name="run1"
+path="src/run1.rs"
 
-[[bin]]
-name="client"
-path="src/client.rs"
 
 [dependencies]
 message-io="0.14"
 serde = { version = "1.0.188", features = ["derive"] }
 bincode = "1.3.1"
+log = "0.4.2"
+env_logger = "0.10.0"
