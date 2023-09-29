@@ -1,3 +1,4 @@
+/// Lamport Clock implementation.
 use std::cmp;
 
 #[derive(Default, Clone)]

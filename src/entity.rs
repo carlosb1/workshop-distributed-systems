@@ -1,5 +1,8 @@
+/// Entity domain code, it defines the necessary
+/// relationship in the code.
 use std::str::FromStr;
 
+/// Node network structure representaiton.
 #[derive(Clone)]
 pub struct Node {
     pub address: String,

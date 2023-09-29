@@ -1,7 +1,7 @@
+/// Network server implementation for message-io
 use crate::adapters::lamport::LamportClock;
-use crate::adapters::network::message::{FromClientMessage, FromServerMessage};
 use crate::adapters::network::net::run_server;
-use crate::core::ServerDispatcher;
+use crate::core::DistributedServerDispatcher;
 use crate::entity::Node;
 use log;
 use std::collections::HashMap;
@@ -9,22 +9,22 @@ use std::sync::Arc;
 use std::sync::Mutex;
 use std::thread::{self, JoinHandle};
 
-pub trait Dispatcher {
-    fn dispatch(&mut self, received: FromClientMessage) -> Option<FromServerMessage>;
-}
-
+/// Server struturre with name, node information and dispatcher
 #[derive(Clone, Default)]
 pub struct Server {
     node: Node,
     name: String,
-    dispatcher: ServerDispatcher,
+    dispatcher: DistributedServerDispatcher,
 }
 
 impl Server {
     pub fn new(latest_time: u64, name: String) -> Self {
         Server {
             name,
-            dispatcher: ServerDispatcher::new(LamportClock::new(latest_time), HashMap::new()),
+            dispatcher: DistributedServerDispatcher::new(
+                LamportClock::new(latest_time),
+                HashMap::new(),
+            ),
             ..Default::default()
         }
     }
